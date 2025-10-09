@@ -55,9 +55,9 @@ yy_scaled = scaler.fit_transform(np.reshape(yy.values, (len(yy), 1)))
 # 数据分割函数
 def split(xx_scaled, yy_scaled):
     x_train, x_test_val, y_train, y_test_val = train_test_split(xx_scaled, yy_scaled, shuffle=True, test_size=0.2,
-                                                                random_state=1)
+                                                                random_state=42)
     x_test, x_val, y_test, y_val = train_test_split(x_test_val, y_test_val, shuffle=True, test_size=0.2,
-                                                    random_state=1)
+                                                    random_state=42)
 
     y2 = yy_scaled.ravel()
     ind_train = [np.argwhere(y2 == y_train[i])[0].item() for i in range(len(y_train)) if y_train[i] in y2]
@@ -240,4 +240,5 @@ def visualize_bee_swarm_only(shap_values_sorted, x_test_sorted, feature_names_so
 
 # 调用修改后的可视化函数
 visualize_bee_swarm_only(shap_values_sorted, x_test_sorted, feature_names_sorted,
+
                           mean_abs_shap_sorted, shap_min, shap_max, importance_max)
